@@ -80,6 +80,20 @@
 <?php
 include ("conexion.php");
 
+// obtengo todos los archivos
+$amountFiles = count($_FILES['miarchivo']['name']);
+	//archivo
+	for($i=0; $i<=$amountFiles; $i++)
+	{
+		if(!empty($_FILES['miarchivo']['name'][$i]))
+		{
+			$directorio = "adjuntos_presupuesto/";
+			$archivo = $directorio.date('m-d-Y_hia').$_FILES['miarchivo']['name'][$i];
+			$temp_name  = $_FILES['miarchivo']['tmp_name'][$i];
+			move_uploaded_file($temp_name, $archivo);
+		}
+	}
+
 $no_expediente=$_POST['no_expediente'];
 $id_contrato=$_POST['id_contrato'];
 $monto_total=$_POST['monto_total'];

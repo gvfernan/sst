@@ -137,6 +137,36 @@ $id_contrato = $_GET["id_contrato"];
 								  <div class="form-group">
 								  <div class="col-sm-6">
 								  <p><label>Adjuntar archivos: </label><a href="<?php echo "adjuntos_presupuesto.php?expediente=$no_expediente&id_contrato=$id_contrato" ?>" target="_blank"> Haga clic aquí para adjuntar</a> <!-- adjuntar varios archivos y permitir describirlos con una lista-->
+									<div class="form-group">
+								    <label for="inputEmail3" class="col-sm-2 control-label">Tipo:</label>
+								    <div class="col-sm-6">
+								     <p><input list="tipo" name="tipo" class="form-control" />
+										<datalist id="tipo">
+											<option value="nota_costos_director_subsidios">Nota Solicitud Costos Directos/Subsidio</option>
+											<option value="nota_expediente_rendicion">Nota Solicitud Expte. Rendición</option>
+											<option value="nota_honorarios_recibo_de_sueldo">Nota Solicitud Honorarios Recibo Sueldo</option>
+											<option value="nota_solicitud_honorarios_factura">Nota Solicitud Honorarios Factura</option>
+											<option value="nota_solicitud_beat">Nota Solicitud B.E.A.T.</option>
+										</datalist>
+								    </div>
+								  </div>
+						
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Observaciones: </label>
+								<div class="col-sm-6">
+									<textarea class="form-control" rows="3" name="observaciones"></textarea>
+								</div>
+						</div>
+						<div class="form-group">
+						   	<label class="col-md-2 control-label">Archivo digital:</label>
+								<div class="col-md-6">
+									<input type="file" class="btn btn-default" id="miarchivo[]" name="miarchivo[]" multiple="" required>
+									<p class="help-block">Haga clic en "Seleccionar archivo para adjuntar"</p>
+								</div>
+						</div>
+						<div id="contenedor">
+						</div>
+						<button type="button" onclick="clonar();">Adjuntar otro archivo</button>
 								  </div>
 								  </div>
 								  
@@ -178,5 +208,32 @@ $id_contrato = $_GET["id_contrato"];
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
+		<script>
+				var count_click = 0;
+				function clonar() {
+					var contenedor = document.getElementById("contenedor");
+					count_click +=1;
+  				contenedor.insertAdjacentHTML('beforeend',"<div class='form-group'>" +
+								    "<label for='inputEmail3' class='col-sm-2 control-label'>Tipo:</label>" +
+								    "<div class='col-sm-6'>" +
+								    "<p><input list='tipo' name='tipo' class='form-control' />" +
+										"<datalist id='tipo_"+count_click+"'>" +
+										"<option value='nota_costos_director_subsidios'>Nota Solicitud Costos Directos/Subsidio</option>" +
+										"<option value='nota_expediente_rendicion'>Nota Solicitud Expte. Rendición</option>" +
+										"<option value='nota_honorarios_recibo_de_sueldo'>Nota Solicitud Honorarios Recibo Sueldo</option>" +
+										"<option value='nota_solicitud_honorarios_factura'>Nota Solicitud Honorarios Factura</option>" +
+										"<option value='nota_solicitud_beat'>Nota Solicitud B.E.A.T.</option>" +
+										"</datalist></div></div>" +
+										"<div class='form-group'>" +
+											"<label class='col-sm-2 control-label'>Observaciones: </label>" +
+											"<div class='col-sm-6'>" +
+											"<textarea class='form-control' rows='3' name='observaciones_"+count_click+"'></textarea>" +
+											"</div></div><div class='form-group'>" +
+						   	"<label class='col-md-2 control-label'>Archivo digital:</label>" +
+								"<div class='col-md-6'>" +
+								"<input type='file' class='btn btn-default' id='miarchivo[]' name='miarchivo[]'>" +
+								"<p class='help-block'>Haga clic en 'Seleccionar archivo para adjuntar'</p></div></div>");
+				}
+		</script>
   </body>
 </html>
